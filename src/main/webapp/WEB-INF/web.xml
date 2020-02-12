@@ -6,24 +6,37 @@
 
     <display-name>Topjava</display-name>
 
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
     <servlet>
         <servlet-name>userServlet</servlet-name>
         <servlet-class>ru.javawebinar.topjava.web.UserServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>userServlet</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>mealServlet</servlet-name>
         <servlet-class>ru.javawebinar.topjava.web.MealServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
-
-    <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>mealServlet</servlet-name>
         <url-pattern>/meals</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MealController</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.MealController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MealController</servlet-name>
+        <url-pattern>/MealController</url-pattern>
     </servlet-mapping>
 
 
