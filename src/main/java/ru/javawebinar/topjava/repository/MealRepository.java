@@ -9,10 +9,10 @@ public interface MealRepository {
     Meal save(Meal meal);
 
     // false if not found
-    boolean delete(int id);
+    boolean delete(String currentUser, int id);
 
     // null if not found
-    Meal get(int id);
+    Meal get(String currentUser, int id);
 
-    Collection<Meal> getAll();
+    Collection<Meal> getAll(String currentUser);
 }
