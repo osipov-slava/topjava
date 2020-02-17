@@ -37,16 +37,25 @@ public class MealRestController {
 
     public void methodPost (HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
+        String action = request.getParameter("action");
+        switch (action == null ? "default" : action){
+            case "meals" :
+                String id = request.getParameter("id");
+                Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
+                        LocalDateTime.parse(request.getParameter("dateTime")),
+                        request.getParameter("description"),
+                        Integer.parseInt(request.getParameter("calories")));
 
-        Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
-                LocalDateTime.parse(request.getParameter("dateTime")),
-                request.getParameter("description"),
-                Integer.parseInt(request.getParameter("calories")));
+                log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
+                save(meal);
+                response.sendRedirect("meals");
+                break;
 
-        log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
-        save(meal);
-        response.sendRedirect("meals");
+            case "default" :
+                response.sendRedirect("meals");//?
+        }
+
+
     }
 
     public void methodGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,7 +81,7 @@ public class MealRestController {
                 request.setAttribute("meals", getAll());
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
-            case "filtered":
+            case "mealsFilter" :
                 log.info("getAllFiltered");
                 request.setAttribute("meals",
                         getAllBetweenDates(request.getParameter("startDate"),
@@ -80,6 +89,7 @@ public class MealRestController {
                                 request.getParameter("startTime"),
                                 request.getParameter("endTime")));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
+                break;
             default:
         }
     }
