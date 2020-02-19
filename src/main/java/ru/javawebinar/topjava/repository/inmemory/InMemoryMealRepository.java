@@ -18,8 +18,10 @@ public class InMemoryMealRepository implements MealRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        MealsUtil.MEALS.forEach(meal -> save(1, meal));
         MealsUtil.MEALS.forEach(meal -> save(2, meal));
+        MealsUtil.MEALS.forEach(meal -> {
+            save(3, new Meal(meal.getDateTime(), meal.getDescription(), meal.getCalories()));
+        });
     }
 
     @Override

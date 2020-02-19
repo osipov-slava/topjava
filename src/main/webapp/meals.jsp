@@ -24,17 +24,25 @@
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <form method="get" action="meals">
-        <dd><input name="action" id="action" value="mealsFilter" hidden></dd>
-        <dt>Дата с:</dt>
-        <dd><input type="date" name="startDate" id="startDate"></dd>
-        <dt>Дата по:</dt>
-        <dd><input type="date" name="endDate" id="endDate"></dd>
-        <dt>Время с:</dt>
-        <dd><input type="time" name="startTime" id="startTime"></dd>
-        <dt>Время по:</dt>
-        <dd><input type="time" name="endTime" id="endTime"></dd>
+        <input name="action" value="mealsFilter">
+        <label>
+            Дата с:
+            <input type="date" id="sd" name="startDate"><br>
+        </label>
+        <label>
+            Дата по:
+            <input type="date" id="ed" name="endDate"><br>
+        </label>
+        <label>
+            Время с:
+            <input type="time" id="st" name="startTime"><br>
+        </label>
+        <label>
+            Время по:
+            <input type="time" id="et" name="endTime"><br>
+        </label>
         <button type="submit">Отфильтровать</button>
-        <button type="reset">Отменить</button>
+        <button type="reset">Сбросить</button>
     </form>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
