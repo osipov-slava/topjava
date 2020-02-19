@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
+import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.util.MealsUtil;
+import ru.javawebinar.topjava.web.SecurityUtil;
 import to.MealTo;
 
 import java.io.IOException;
@@ -29,17 +31,23 @@ public class MealRestController {
     private static final Logger log = LoggerFactory.getLogger(MealRestController.class);
     
     private MealService service;
+    private UserService userService;
 
     @Autowired
-    public MealRestController(MealService service) {
+    public MealRestController(MealService service, UserService userService) {
         this.service = service;
+        this.userService = userService;
     }
 
     public void methodPost (HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         switch (action == null ? "default" : action){
-            case "meals" :
+            case "setUser" :
+                SecurityUtil.setCurrentUser(Integer.parseInt(request.getParameter("userId")));
+                response.sendRedirect("meals");
+                break;
+            case "saveMeal" :
                 String id = request.getParameter("id");
                 Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
                         LocalDateTime.parse(request.getParameter("dateTime")),
@@ -60,7 +68,6 @@ public class MealRestController {
 
     public void methodGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
         switch (action == null ? "all" : action) {
             case "delete":
                 int id = getId(request);

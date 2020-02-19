@@ -7,8 +7,19 @@
 <h3>Проект <a href="https://github.com/JavaWebinar/topjava" target="_blank">Java Enterprise (Topjava)</a></h3>
 <hr>
 <ul>
-    <li><a href="users">Users</a></li>
-    <li><a href="meals">Meals</a></li>
+<!--    <li><a href="users">Users</a></li>-->
+<form action="meals" method="post">
+<!--    <label>-->
+<!--        Введите имя пользователя<input type="text" name="userName" value="User Name" required>-->
+<!--    </label>-->
+    <input name="action" value="setUser" hidden>
+    <select name="userId" required>
+        <option value="1">Admin</option>
+        <option value="2">Slava</option>
+        <option value="3">Marina</option>
+    </select>
+    <input type="submit" value="Войти">
+</form>
 </ul>
 </body>
 </html>
