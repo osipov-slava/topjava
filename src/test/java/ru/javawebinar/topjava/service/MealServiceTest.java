@@ -3,7 +3,6 @@ package ru.javawebinar.topjava.service;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.postgresql.util.PSQLException;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -99,7 +98,7 @@ public class MealServiceTest {
         assertMatch(service.get(newId, USER_ID), newMeal);
     }
 
-    @Test (expected = DuplicateKeyException.class)
+    @Test(expected = DuplicateKeyException.class)
     public void createExistDateTime() {
         Meal newMeal = new Meal(MEAL1);
         newMeal.setId(null);

@@ -3,7 +3,6 @@ package ru.javawebinar.topjava.service;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.MealRepository;
 
 import java.time.LocalDate;
