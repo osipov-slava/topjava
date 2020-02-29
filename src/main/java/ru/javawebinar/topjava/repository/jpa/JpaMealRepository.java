@@ -33,7 +33,7 @@ public class JpaMealRepository implements MealRepository {
                     .setParameter("calories", meal.getCalories())
                     .setParameter("dateTime", meal.getDateTime())
                     .setParameter("userId", userId)
-                    .executeUpdate()==0)
+                    .executeUpdate() == 0)
                 return null;
         }
         return meal;
