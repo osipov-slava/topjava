@@ -1,10 +1,13 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.rules.ExternalResource;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -40,5 +43,16 @@ abstract public class AbstractServiceTest {
                 throw getRootCause(e);
             }
         });
+    }
+
+    @Autowired
+    private Environment environment;
+
+    protected boolean jdbc = false;
+    @Before
+    public void before(){
+        for(String profile : environment.getActiveProfiles()){
+            if ("jdbc".equals(profile)) jdbc = true;
+        }
     }
 }
