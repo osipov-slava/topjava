@@ -43,7 +43,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     public void create() throws Exception {
         User newUser = getNew();
         User created = service.create(newUser);
-        Integer newId = created.getId();
+        int newId = created.id();
         newUser.setId(newId);
         USER_MATCHER.assertMatch(created, newUser);
         USER_MATCHER.assertMatch(service.get(newId), newUser);
@@ -54,6 +54,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
         service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
     }
 
+    @Test
     public void delete() throws Exception {
         service.delete(USER_ID);
         Assert.assertNull(repository.get(USER_ID));
